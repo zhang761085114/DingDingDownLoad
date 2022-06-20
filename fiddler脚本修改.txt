@@ -1,0 +1,11 @@
+if (oSession.HostnameIs("retcode.taobao.com") && oSession.uriContains("args_url")){  
+			oSession.utilDecodeResponse();
+			//消除保存的请求可能存在乱码的情况 
+			var fso;
+			fso = new ActiveXObject("Adodb.Stream");
+			fso.Charset = "gbk";
+			fso.Open();
+			fso.WriteText(oSession.PathAndQuery);
+			fso.SaveToFile( "request_dingding.txt",  2 ); //保存的文件路径
+			fso.close();
+		} 
